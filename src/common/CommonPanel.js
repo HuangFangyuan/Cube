@@ -6,13 +6,12 @@ import Navbar from './navbar/Navbar';
 import AsideTab from './asideTab/AsideTab';
 import DbForm from './dbForm/DbForm';
 import ModelForm from './modelForm/ModelForm';
-import { JobsPanel } from './Jobs/JobsPanel';
 
 import 'antd/dist/antd.css';
 
 const { Header, Content, Sider } = Layout;
 
-export default class App extends Component {
+export default class CommonPanel extends Component {
   static propTypes = {
     children: PropTypes.node,
   };
@@ -23,11 +22,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Layout>
-          <Header className="header">
-            <Navbar />
-          </Header>
+     
           <Layout>
             <Sider width={300} style={{ background: '#fff' }}>
               <AsideTab />
@@ -41,15 +36,10 @@ export default class App extends Component {
                   minHeight: 280,
                 }}
               >
-                <Route exact path="/" component={DbForm} />
-                <Route exact path="/db" component={DbForm} />
-                <Route exact path="/model" component={ModelForm} />
-                <Route exact path="/jobs" component={JobsPanel} />
+                {this.props.children}
               </Content>
             </Layout>
           </Layout>
-        </Layout>
-      </Router>
     );
   }
 }
